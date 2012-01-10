@@ -1,5 +1,13 @@
 
 var SolarSystem = function(parent, x, y, w, h, r, r2, planet_attrs){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  this.r = r;
+  this.r2 = r2;
+  this.planet_attrs = planet_attrs;
+
   this.addPlanet = function(){
     this.planets << planet;
     var content = this;
@@ -42,29 +50,27 @@ var SatelliteEditor = function(satellite){
   this.satellite = satellite;
   this.show = function(){
     $.each(this.hash,function(){
-      content.prepend($('tr').css({
-        display: 'block'
-        // TODO
-      }).append($('<td>this.key</td><td><input value=”#{this.value}”></td>'));
+      content.prepend(
+        $('tr').css({
+          display: 'block'
+        }).append($('<td>this.key</td><td><input value=”#{this.value}”></td>'))
+      );
     });
-  };
+  }
   this.dispose = function(){
     this.elem.find('tr').remove();
   };
   this.ok = function(){
-    this.ok_handler(this.elem.find('input').map( // TODO ));
+    this.ok_handler(this.elem.find('input')); // TODO .map();
     this.dispose();
   }
 }
 
-var SatelliteTooltip = function(, , , , , , , ){
+var SatelliteTooltip = function(){
   this.show = function(){
-
   }
   this.hide = function(){
-
   }
   this.disabled = function(){
-
   }
 }
