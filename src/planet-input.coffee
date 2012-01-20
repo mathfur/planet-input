@@ -16,7 +16,7 @@ $ ->
       .data('hashs', hashs)
       .bind 'remove-all-satellites', ->
         console.log '>>remove-all-satellite'
-       $(@).siblings().filter('.satellite').remove()
+        $(@).siblings().filter('.satellite').remove()
       .click ->
         console.log '>>click@20'
         $(@).data('hashs', $(@).data('hashs')+[{}])
@@ -71,12 +71,12 @@ $ ->
     console.log(results)
     # $('#draw-area').trigger('add-planet', 100, 100, 20, 10, 5, hashs)
 
-    $('#draw').click ->
-      console.log '>>clicked'
-      hashs_sample = [
-        (name: 10, age: 29),
-        (name: 12, age: 31),
-      ]
-      console.log $('#draw-area')
-      $('#draw-area').trigger('add-planet', [100, 100, 20, 10, 5, hashs_sample])
-      false
+  $('#draw').click ->
+    console.log '>>clicked'
+    hashs_sample = [
+      (name: 10, age: 29),
+      (name: 12, age: 31),
+    ]
+    console.log $('#draw-area')
+    $('#draw-area').trigger('add-planet', [100, 100, 20, 10, 5, hashs_sample])
+    false
