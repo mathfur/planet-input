@@ -6,3 +6,7 @@ table {
   border: 1px solid #000000;
   border-collapse: collapse;
 }
+
+div#draw-area svg{
+  border: 1px solid black;
+}

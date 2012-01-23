@@ -14,6 +14,7 @@ $ ->
     $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
       .attr(cx: x, cy: y, r:r1)
       .data('hashs', hashs)
+      .appendTo("#draw-area svg")
       .bind 'remove-all-satellites', ->
         console.log '>>remove-all-satellite'
         $(@).siblings().filter('.satellite').remove()
@@ -25,10 +26,11 @@ $ ->
         hashs_ = $(@).data('hashs')
         if hashs_.length is 0
           return
-        _.each hashs_, (hash) ->
+        _.each hashs_, (hash, i) ->
           $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
             .attr( cx: (x+r3*Math.cos(2*Math.PI*i/hashs_.length)), cy: (y+r3*Math.sin(2*Math.PI*i/hashs_.length)),  r: r2)
             .addClass('satellite')
+            .appendTo("#draw-area svg")
             .mouseover ->
               console.log '>>#mouseover'
               $('#draw-area').append(
@@ -61,7 +63,7 @@ $ ->
     values_num = _.map($('#main').find('tr'), (e)-> $(e).find('td.value').length).max().first()
     _.range(0, values_num).each (i) ->
       result = {}
-      $('.key').each () ->
+      $('.key').each ->
         j = $(@)
         k = j.children().val()
         v = j.siblings().filter("td.value").eq(i).children().val()
@@ -78,5 +80,5 @@ $ ->
       (name: 12, age: 31),
     ]
     console.log $('#draw-area')
-    $('#draw-area').trigger('add-planet', [100, 100, 20, 10, 5, hashs_sample])
+    $('#draw-area').trigger('add-planet', [200, 200, 30, 5, 100, hashs_sample])
     false
