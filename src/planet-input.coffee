@@ -6,15 +6,14 @@ console.log('>>13:21');
 $ ->
   lg = console.log
   $.obj2table = (obj) ->
-      inner = $.map(obj, (k, v) -> "<tr><td>#{k}</td><td>#{v}</td></tr>")
-      $("<table>#{inner}</table>")
+      inner = $.map(obj||{}, (k, v) -> "<tr><td>#{k}</td><td>#{v}</td></tr>")
+      $("<table>#{inner.join('')}</table>")
   $('#draw-area').bind 'add-planet', (event, x, y, r1, r2, r3, hashs) ->
-    console.log '>>add-planet'
-    console.log(event, x, y, r1, r2, r3, hashs)
+    svg = $(this).find('svg:first')
     $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
       .attr(cx: x, cy: y, r:r1)
       .data('hashs', hashs)
-      .appendTo("#draw-area svg")
+      .appendTo(svg)
       .bind 'remove-all-satellites', ->
         console.log '>>remove-all-satellite'
         $(@).siblings().filter('.satellite').remove()
@@ -30,18 +29,20 @@ $ ->
           $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
             .attr( cx: (x+r3*Math.cos(2*Math.PI*i/hashs_.length)), cy: (y+r3*Math.sin(2*Math.PI*i/hashs_.length)),  r: r2)
             .addClass('satellite')
-            .appendTo("#draw-area svg")
+            .appendTo(svg)
+            .data('hash', hash)
             .mouseover ->
               console.log '>>#mouseover'
               $('#draw-area').append(
                 $('<div/>').attr('id','satellite-tooltip')
                            .append($.obj2table($(@).data('hash')))
-                           .css(position: 'absolute', top: $(@).attr('cx'), left: $(@).attr('cy'), 'z-index': 2)
+                           .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
               )
             .mouseout ->
               console.log '>>#mouseout'
               $('#satellite-tooltip').remove()
             .click ->
+                console.log '>>click'
                 wnd = $('<div><form></form></div>')
                   .append($.obj2table($(@).data('hash')))
                   .append $('<button/>')
@@ -52,6 +53,7 @@ $ ->
                     .click ->
                       wnd.trigger('save.planet-input')
                       wnd.trigger('close.planet-input')
+                  .appendTo '#draw-area svg'
                   .bind 'close.planet-input', -> $(@).remove()
                   .bind 'save.planet-input', ->
                     result = {}
