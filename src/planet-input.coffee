@@ -14,7 +14,7 @@ $ ->
   $('#draw-area').bind 'add-planet', (event, x, y, r1, r2, r3, hashs) ->
     draw_area = $(this)
     svg = $(this).find('svg:first')
-    $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
+    planet = $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
       .attr(cx: x, cy: y, r:r1)
       .data('hashs', hashs)
       .appendTo(svg)
@@ -30,7 +30,7 @@ $ ->
         if hashs_.length is 0
           return
         _.each hashs_, (hash, i) ->
-          $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
+          satellite = $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
             .attr( cx: (x+r3*Math.cos(2*Math.PI*i/hashs_.length)), cy: (y+r3*Math.sin(2*Math.PI*i/hashs_.length)),  r: r2)
             .addClass('satellite')
             .appendTo(svg)
@@ -56,14 +56,19 @@ $ ->
                   .append $('<button>Ok</button>')
                     .attr(id: 'satellite-editor-ok')
                     .click ->
+                      console.log ">> ok is clicked"
                       wnd.trigger('save.planet-input')
                       wnd.trigger('close.planet-input')
-                  .bind 'close.planet-input', -> $(@).remove()
-                  .bind 'save.planet-input', ->
+                  .bind('close.planet-input', ->
+                    console.log ">>close.planet_input"
+                    $(@).remove())
+                  .bind('save.planet-input', ->
+                    console.log ">>save.planet_input"
                     result = {}
-                    $(@).find('input').each -> result[$(@).name] = $(@).val()
-                    circle.data('hashs', circle.data('hashs')+[result])
-                    circle.trigger('upload.planet-input')
+                    $(@).find('input').each -> result[$(@).attr('name')] = $(@).val()
+                    planet.data('hashs', planet.data('hashs')+[result])
+                    satellite.data('hash', result)
+                    planet.trigger('upload.planet-input'))
                 draw_area.append(wnd)
       .trigger('update.planet-input')
     results = []
