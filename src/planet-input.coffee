@@ -47,13 +47,13 @@ $ ->
             #  $('#satellite-tooltip').remove()
             .click ->
                 console.log '>>click'
-                wnd = $('<div><form></form></div>')
+                wnd = $('<div id="satellite-editor"><form></form></div>')
                   .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
                   .append($.obj2table($(@).data('hash'), edit: true))
-                  .append $('<button/>')
+                  .append($('<button>Cancel</button>')
                     .attr(id: 'satellite-editor-cancel')
-                    .click -> wnd.trigger('close.planet-input')
-                  .append $('<button/>')
+                    .click(-> wnd.trigger('close.planet-input')))
+                  .append $('<button>Ok</button>')
                     .attr(id: 'satellite-editor-ok')
                     .click ->
                       wnd.trigger('save.planet-input')

@@ -2,7 +2,7 @@ th{
   text-align: right;
 }
 
-table {
+div#satellite-editor {
   border: 1px solid #000000;
   border-collapse: collapse;
 }
