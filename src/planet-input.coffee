@@ -47,6 +47,7 @@ $ ->
             #  $('#satellite-tooltip').remove()
             .click ->
                 console.log '>>click'
+                $('#satellite-editor').trigger('close.planet-input')
                 wnd = $('<div id="satellite-editor"><form></form></div>')
                   .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
                   .append($.obj2table($(@).data('hash'), edit: true))
@@ -60,10 +61,10 @@ $ ->
                       wnd.trigger('save.planet-input')
                       wnd.trigger('close.planet-input')
                   .bind('close.planet-input', ->
-                    console.log ">>close.planet_input"
+                    console.log ">>close.planet-input"
                     $(@).remove())
                   .bind('save.planet-input', ->
-                    console.log ">>save.planet_input"
+                    console.log ">>save.planet-input"
                     result = {}
                     $(@).find('input').each -> result[$(@).attr('name')] = $(@).val()
                     planet.data('hashs', planet.data('hashs')+[result])
