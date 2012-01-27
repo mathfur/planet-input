@@ -49,7 +49,14 @@ $ ->
                 console.log '>>click'
                 $('#satellite-editor').trigger('close.planet-input')
                 wnd = $('<div id="satellite-editor"><form></form></div>')
-                  .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
+                  .css(
+                     position: 'absolute',
+                     display: 'block',
+                     top: $(@).attr('cy'),
+                     left: $(@).attr('cx'),
+                     'z-index': 3,
+                     'margin': '10px'
+                  )
                   .append($.obj2table($(@).data('hash'), edit: true))
                   .append($('<button>Cancel</button>')
                     .attr(id: 'satellite-editor-cancel')
@@ -94,4 +101,10 @@ $ ->
     ]
     console.log $('#draw-area')
     $('#draw-area').trigger('add-planet', [200, 200, 30, 5, 100, hashs_sample])
+    false
+
+  $('#extract').click ->
+    console.log '>>extract'
+    console.log $('#draw-area').find('planet')
+    console.log $('#draw-area').find('planet').data('hashs')
     false
