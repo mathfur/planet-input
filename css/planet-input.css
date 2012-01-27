@@ -1,0 +1,16 @@
+th{
+  text-align: right;
+}
+
+div#satellite-editor {
+  border: 1px solid #000000;
+  border-collapse: collapse;
+}
+
+div#draw-area{
+  position: relative;
+}
+
+div#draw-area svg{
+  border: 1px solid black;
+}
