@@ -14,3 +14,9 @@ div#draw-area{
 div#draw-area svg{
   border: 1px solid black;
 }
+
+div#draw-area {
+  width: 1000px;
+  height: 1000px;
+  border: 1px solid blue;
+}

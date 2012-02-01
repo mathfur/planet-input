@@ -4,6 +4,7 @@
 
 $ ->
   lg = console.log
+
   $.obj2table = (obj, options={}) ->
       inner = ''
       if options.edit
@@ -11,13 +12,14 @@ $ ->
       else
         inner = $.map(obj||{}, (k, v) -> "<tr><td>#{k}</td><td>#{v}</td></tr>")
       $("<table>#{inner.join('')}</table>")
+  $('#draw-area').svg()
   $('#draw-area').bind 'add-planet', (event, x, y, r1, r2, r3, hashs) ->
     draw_area = $(this)
-    svg = $(this).find('svg:first')
-    planet = $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
-      .attr(cx: x, cy: y, r:r1)
+    svg = $(this).svg('get')
+    planet = $(svg.circle(x, y, r1, {fill: 'blue', stroke: 'blue', strokeWidth: 3}))
+    console.log(">>planet", x, y, r1)
+    planet.addClass('planet')
       .data('hashs', hashs)
-      .appendTo(svg)
       .bind 'remove-all-satellites', ->
         console.log '>>remove-all-satellite'
         $(@).siblings().filter('.satellite').remove()
@@ -30,10 +32,8 @@ $ ->
         if hashs_.length is 0
           return
         _.each hashs_, (hash, i) ->
-          satellite = $(document.createElementNS('http://www.w3.org/2000/svg', 'circle'))
-            .attr( cx: (x+r3*Math.cos(2*Math.PI*i/hashs_.length)), cy: (y+r3*Math.sin(2*Math.PI*i/hashs_.length)),  r: r2)
-            .addClass('satellite')
-            .appendTo(svg)
+          satellite = $(svg.circle((x+r3*Math.cos(2*Math.PI*i/hashs_.length)),  (y+r3*Math.sin(2*Math.PI*i/hashs_.length)), r2, {fill: 'green', stroke: 'green', strokeWidth: 3}))
+          satellite.addClass('satellite')
             .data('hash', hash)
             #.mouseover ->
             #  console.log '>>#mouseover'
@@ -105,6 +105,14 @@ $ ->
 
   $('#extract').click ->
     console.log '>>extract'
-    console.log $('#draw-area').find('planet')
-    console.log $('#draw-area').find('planet').data('hashs')
+    console.log $('#draw-area').find('.planet')
+    console.log $('#draw-area').find('.planet').data('hashs')
+    false
+
+  $('#debug').click ->
+    console.log '>>debug'
+    s0 = $('#draw-area2').svg()
+    s = $('#draw-area2').svg('get')
+    c = s.circle(10, 20, 30, {fill: 'green', stroke: 'green', strokeWidth: 3})
+    $(c).addClass('foo')
     false
