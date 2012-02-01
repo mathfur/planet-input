@@ -5,6 +5,7 @@ th{
 div#satellite-editor {
   border: 1px solid #000000;
   border-collapse: collapse;
+  background: #fff;
 }
 
 div#draw-area{
