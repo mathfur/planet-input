@@ -108,8 +108,7 @@ $ ->
 
   $('#extract').click ->
     console.log '>>extract'
-    console.log $('#draw-area').find('.planet')
-    console.log $('#draw-area').find('.planet').data('hashs')
+    console.log $('#draw-area').find('.planet:first').data('hashs')
     false
 
   $('#debug').click ->
