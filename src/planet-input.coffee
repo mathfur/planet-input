@@ -35,6 +35,7 @@ $ ->
           satellite = $(svg.circle((x+r3*Math.cos(2*Math.PI*i/hashs_.length)),  (y+r3*Math.sin(2*Math.PI*i/hashs_.length)), r2, {fill: 'green', stroke: 'green', strokeWidth: 3}))
           satellite.addClass('satellite')
             .data('hash', hash)
+            .data('index', i)
             #.mouseover ->
             #  console.log '>>#mouseover'
             #  draw_area.append(
@@ -74,7 +75,9 @@ $ ->
                     console.log ">>save.planet-input"
                     result = {}
                     $(@).find('input').each -> result[$(@).attr('name')] = $(@).val()
-                    planet.data('hashs', planet.data('hashs')+[result])
+                    data_to_save = planet.data('hashs')
+                    data_to_save[satellite.data('index')] = result
+                    planet.data('hashs', data_to_save)
                     satellite.data('hash', result)
                     planet.trigger('upload.planet-input'))
                 draw_area.append(wnd)
