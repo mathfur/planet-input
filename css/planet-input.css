@@ -6,12 +6,15 @@ div#satellite-editor {
   border: 1px solid #000000;
   border-collapse: collapse;
   background: #fff;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px 1px rgba(100, 100, 100, 0.9);
 }
 
 div#satellite-tooltip {
   border: 1px solid #000000;
   border-collapse: collapse;
   border-radius: 3px;
+  box-shadow: 2px 2px 1px 1px rgba(100, 100, 100, 0.9);
   background: #fff;
 }
 
