@@ -36,16 +36,16 @@ $ ->
           satellite.addClass('satellite')
             .data('hash', hash)
             .data('index', i)
-            #.mouseover ->
-            #  console.log '>>#mouseover'
-            #  draw_area.append(
-            #    $('<div/>').attr('id','satellite-tooltip')
-            #               .append($.obj2table($(@).data('hash')))
-            #               .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
-            #  )
-            #.mouseout ->
-            #  console.log '>>#mouseout'
-            #  $('#satellite-tooltip').remove()
+            .mouseover ->
+              console.log '>>#mouseover'
+              draw_area.append(
+                $('<div/>').attr('id','satellite-tooltip')
+                           .append($.obj2table($(@).data('hash')))
+                           .css(position: 'absolute', top: $(@).attr('cy'), left: $(@).attr('cx'), 'z-index': 2, 'margin': '10px')
+              )
+            .mouseout ->
+              console.log '>>#mouseout'
+              $('#satellite-tooltip').remove()
             .click ->
                 console.log '>>click'
                 $('#satellite-editor').trigger('close.planet-input')

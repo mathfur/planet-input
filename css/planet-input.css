@@ -8,6 +8,13 @@ div#satellite-editor {
   background: #fff;
 }
 
+div#satellite-tooltip {
+  border: 1px solid #000000;
+  border-collapse: collapse;
+  border-radius: 3px;
+  background: #fff;
+}
+
 div#draw-area{
   position: relative;
 }
