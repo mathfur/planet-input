@@ -15,62 +15,53 @@
                         <form>
                         <table id='main' border=1>
                         	<tr>
-                                        <td rowspan='5'><input type='text' /></td>
-                                        <th>x</th>
-                        		<td>
-                        			<input type="text" />
-                        		</td>
+                                        <td rowspan='6'><input class="planet-name" type='text' value="users"/></td>
+                        		<td> <input type="text" value="x"/> </td>
+                        		<td> <input class="x" type="text"/> </td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
                         	</tr>
                         	<tr>
-                                        <th>y</th>
-                        		<td>
-                        			<input type="text" />
-                        		</td>
+                        		<td><input type="text" value="y"/></td>
+                        		<td><input class="y" type="text" /></td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
+                        	</tr>
+                        	<tr class="instance-values-of-a-key">
+                        		<td> <input type="text" value="r"/> </td>
+                        		<td><input class="r" type="text" /></td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
+                        		<td> <input type="text"/> </td>
                         	</tr>
                         	<tr>
-                                        <th>r</th>
-                        		<td>
-                        			<input type="text" />
-                        		</td>
+                        		<td class="key"> <input type="text" value="id"/> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
                         	</tr>
                         	<tr>
-                        		<td class=key>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
+                        		<td class="key"> <input type="text" value="name"/> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
+                        		<td class="value"> <input type="text" /> </td>
                         	</tr>
                         	<tr>
-                        		<td class=key>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
-                        		<td class=value>
-                        			<input type="text" />
-                        		</td>
+                        		<td class=key> <input type="text" value="age"/> </td>
+                        		<td class=value> <input type="text" /> </td>
+                        		<td class=value> <input type="text" /> </td>
+                        		<td class=value> <input type="text" /> </td>
+                        		<td class=value> <input type="text" /> </td>
                         	</tr>
                         </table>
-                        <button id='draw'>描画する</button>
-                        <button id='extract'>取得する</button>
-                        <button id='debug'>Debug</button>
+                        <a href="#" id='draw'>描画する</a>
+                        <a href="#" id='draw2'>描画する(上記表から入力)</a>
+                        <a href="#" id='extract'>取得する</a>
+                        <a href="#" id='debug'>Debug</a>
                 </form>
                 </div>
                 <div id='draw-area'></div>
