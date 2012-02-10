@@ -163,3 +163,10 @@ $ ->
     c = s.circle(10, 20, 30, {fill: 'green', stroke: 'green', strokeWidth: 3})
     $(c).addClass('foo')
     false
+
+  $('#to-matrix').click ->
+    console.log ">>to-matrix"
+    $('.planet').each (i)->
+      $.each $(@).data('hashs'), (j)->
+        $.each @, (k, v)->
+          $('td.key').has('input[value='+k+']').siblings('td.value:nth-child('+(j+2)+')').find('input').eq(0).val(v)
