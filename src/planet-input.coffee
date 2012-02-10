@@ -45,7 +45,7 @@ $ ->
         _.each hashs_, (hash, i) ->
           satellite = $(svg.circle(g, (x+r3*Math.cos(2*Math.PI*i/hashs_.length)),  (y+r3*Math.sin(2*Math.PI*i/hashs_.length)), r2, {fill: 'green', stroke: 'green', strokeWidth: 3}))
           satellite.addClass('satellite')
-            .attr('z-index', 10)
+            .css('z-index', 3)
             .data('hash', hash)
             .data('index', i)
             .mouseover ->
@@ -70,6 +70,7 @@ $ ->
                    'z-index': 3,
                    'margin': '10px'
                 )
+                .click(-> false)
                 .append($.obj2table($(@).data('hash'), edit: true))
                 .append($('<button>Copy</button>')
                   .attr(id: 'satellite-editor-copy')
