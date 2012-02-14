@@ -14,14 +14,14 @@ $ ->
       $("<table>#{inner.join('')}</table>")
   $('#draw-area').svg()
   $('#draw-area').bind 'add-planet', (event, x, y, r1, r2, r3, planet_id, hashs) ->
+    console.log '>>add-planet', x, y, r1, r2, r3, planet_id, hashs
     draw_area = $(this).click ->
       console.log '>>#draw_area.click'
       $('#satellite-editor').trigger('close')
     svg = $(this).svg('get')
-    $('g#'+planet_id).remove()
+    $('#'+planet_id).remove()
     g = svg.group({id: planet_id})
     planet = $(svg.circle(g, x, y, r1, {fill: 'blue', stroke: 'blue', strokeWidth: 3}))
-    console.log(">>planet", x, y, r1)
     planet.addClass('planet')
       .data('hashs', hashs)
       .bind 'remove-all-satellites', ->
@@ -134,11 +134,11 @@ $ ->
     $('table').each ->
       self = $(@)
       planet_name = self.find('.planet-name').val()
-      x = self.find('.x').val()
-      y = self.find('.y').val()
-      r = self.find('.r').val()
+      x = self.find('.x').val()*1
+      y = self.find('.y').val()*1
+      r = self.find('.r').val()*1
       hashs_sample = []
-      td_num = $('td.key').has('input[value=id]').siblings('td.value').has('input[value!=""]').length
+      td_num = $(@).find('td.key').has('input[value=id]').siblings('td.value').has('input[value!=""]').length
       console.log '>>td_num', td_num
       _.range(0, td_num).each (i) ->
         console.log '>>i', i
@@ -148,7 +148,7 @@ $ ->
           v = $(@).siblings('td.value').find('input').eq(i).val()
           hashs_sample[i] ?= {}
           hashs_sample[i][k] = v
-      $('#draw-area').trigger('add-planet', [200, 200, 30, 5, 100, 'planet1', hashs_sample])
+      $('#draw-area').trigger('add-planet', [x, y, r, 5, 100, planet_name, hashs_sample])
     false
 
   $('#extract').click ->
