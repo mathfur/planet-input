@@ -138,12 +138,12 @@ $ ->
       y = self.find('.y').val()*1
       r = self.find('.r').val()*1
       hashs_sample = []
-      td_num = $(@).find('td.key').has('input[value=id]').siblings('td.value').has('input[value!=""]').length
+      td_num = self.find('td.key').has('input[value=id]').siblings('td.value').has('input[value!=""]').length
       console.log '>>td_num', td_num
       _.range(0, td_num).each (i) ->
         console.log '>>i', i
         hash_sample = {}
-        $('td.key').each ->
+        self.find('td.key').each ->
           k = $(@).find('input').val()
           v = $(@).siblings('td.value').find('input').eq(i).val()
           hashs_sample[i] ?= {}
