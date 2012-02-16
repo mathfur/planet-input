@@ -13,7 +13,12 @@ $ ->
         inner = $.map(obj||{}, (k, v) -> "<tr><td>#{k}</td><td>#{v}</td></tr>")
       $("<table>#{inner.join('')}</table>")
   $('#draw-area').svg()
-  $('#draw-area').bind 'add-planet', (event, x, y, r1, r2, r3, planet_id, hashs) ->
+  $('#draw-area').bind 'add-edge', (evt, x1, y1, x2, y2) ->
+    svg = $(this).svg('get')
+    g = svg.group({stroke: "green"})
+    svg.line(g, x1, y1, x2, y2)
+    false
+  .bind 'add-planet', (event, x, y, r1, r2, r3, planet_id, hashs) ->
     console.log '>>add-planet', x, y, r1, r2, r3, planet_id, hashs
     draw_area = $(this).click ->
       console.log '>>#draw_area.click'
@@ -131,12 +136,15 @@ $ ->
 
   $('#draw2').click ->
     console.log '>>clicked(2)'
+    coordinates = {}
     $('table').each ->
       self = $(@)
       planet_name = self.find('.planet-name').val()
       x = self.find('.x').val()*1
       y = self.find('.y').val()*1
       r = self.find('.r').val()*1
+      dsts = self.find('.join-to').val().split(',').filter (e) -> e != ''
+      coordinates[planet_name] = [x,y,dsts]
       hashs_sample = []
       td_num = self.find('td.key').has('input[value=id]').siblings('td.value').has('input[value!=""]').length
       console.log '>>td_num', td_num
@@ -149,6 +157,12 @@ $ ->
           hashs_sample[i] ?= {}
           hashs_sample[i][k] = v
       $('#draw-area').trigger('add-planet', [x, y, r, 5, 100, planet_name, hashs_sample])
+    $.each coordinates, (planet_name, args) ->
+      x = args[0]
+      y = args[1]
+      dsts = args[2]
+      _.each dsts, (dst) ->
+        $('#draw-area').trigger('add-edge', x, y, coordinates[dst][0], coordinates[dst][1])
     false
 
   $('#extract').click ->
@@ -158,10 +172,7 @@ $ ->
 
   $('#debug').click ->
     console.log '>>debug'
-    s0 = $('#draw-area2').svg()
-    s = $('#draw-area2').svg('get')
-    c = s.circle(10, 20, 30, {fill: 'green', stroke: 'green', strokeWidth: 3})
-    $(c).addClass('foo')
+    $('#draw-area').trigger('add-edge', [50, 50, 200, 200])
     false
 
   $('#to-matrix').click ->
